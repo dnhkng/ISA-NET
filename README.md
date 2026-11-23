@@ -104,8 +104,10 @@ scripts/compile.sh model-export/ternlog_vocab_boolean_story_layout.h \
 Splits: bytes 0-900M train, 900M-950M validation, 950M-1000M test.
 Jolt was trained (on an NVIDIA GH200) as a chain of resumed runs, about
 3.2 billion decoded bytes in total, reaching 1.310 bpb on validation; `configs/jolt.toml`
-is the final stage. The Jolt checkpoint (`best.pt`, update 122284) is attached
-to the GitHub release; re-exporting it reproduces `model/` byte for byte.
+is the final stage. The Jolt weights (`jolt-best-model.pt`, update 122284, model state only) are attached
+to the [v1.0 release](https://github.com/dnhkng/ISA-NET/releases/tag/v1.0); re-exporting them with
+`scripts/export.sh` reproduces `model/` byte for byte. The release also has the original
+prebuilt macOS arm64 binary used for every number above.
 
 ## Reproducing the comparison
 
