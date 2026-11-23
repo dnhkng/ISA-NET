@@ -1,0 +1,16 @@
+[project]
+name = "isa-net"
+version = "0.1.0"
+description = "Training and export code for ISA-NET, an Apple-M4-native neural lossless compressor"
+requires-python = ">=3.11"
+dependencies = ["numpy>=2.0", "torch>=2.6", "tokenizers>=0.20"]
+
+[project.scripts]
+ternlog-vocab = "ternlog_vocab.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ternlog_vocab", "src/ternlog_mnist"]

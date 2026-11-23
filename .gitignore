@@ -1,0 +1,13 @@
+build/
+model-export/
+data/
+runs/
+checkpoints/
+.venv/
+__pycache__/
+*.pyc
+*.tli
+*.tli4
+bench/compare/work/
+bench/compare/bench_config.json
+bench/compare/results-local/

@@ -1,0 +1,31 @@
+{
+  "utc": "2026-11-22T15:48:00Z",
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "hw.model": "Mac16,8",
+  "cpu": "Apple M4 Pro",
+  "perf_cores": "8",
+  "eff_cores": "4",
+  "l2_perf_cluster_bytes": "16777216",
+  "memsize_bytes": "25769803776",
+  "power": "Now drawing from 'AC Power'",
+  "clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "jolt_sha256": "4a8c5899b4aafd74beec59db4bc855dd0f1d3e6a064f4f32984f92a52c136547",
+  "cmix_sha256": "194cdf14d764c57bbdba89dec96364bf9064977a5c755f3fd202291a7ce744e2",
+  "paq8px_sha256": "6ea6e4832a39415675d54843c6b7a43d65d2c0935cda6999b9ebac6a9763d0e1",
+  "xz": "xz (XZ Utils) 5.8.3",
+  "zstd": "*** Zstandard CLI (64-bit) v1.5.7, by Yann Collet ***",
+  "bzip2": "bzip2, a block-sorting file compressor.  Version 1.0.8, 13-Jul-2019.",
+  "7zz": "7-Zip (z) 25.01 (arm64) : Copyright (c) 1999-2025 Igor Pavlov : 2025-08-03",
+  "config": {
+    "jolt": "isa-net-m4",
+    "cmix": "cmix/cmix",
+    "cmix_dictionary": "cmix/dictionary/english.dic",
+    "paq8px": "paq8px/build/paq8px",
+    "paq8px_level": "-11L",
+    "sevenzip": "7zz",
+    "xz": "xz",
+    "zstd": "zstd",
+    "bzip2": "bzip2",
+    "enwik9": "enwik9"
+  }
+}

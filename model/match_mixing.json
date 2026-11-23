@@ -1,0 +1,9 @@
+{
+  "weights": [0.13, 0.6, 0.55, 0.91],
+  "confidences": [0.9613709257907368, 0.9895556829396188, 0.9926462985047876, 0.9979405363598756],
+  "history": 65536,
+  "table_bits": 16,
+  "context": 6,
+  "bucket_lower_edges": [6, 16, 32, 64],
+  "fit_slice": "R47 mixer carried unchanged for an initial Jolt native screen; not Jolt-calibrated"
+}

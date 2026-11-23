@@ -1,0 +1,1373 @@
+{
+  "format": "ternlog-vocab-boolean-ax1-m4-v1",
+  "checkpoint": "runs/lossless_enwik_c1536_jolt_r1/c1536/best.pt",
+  "checkpoint_update": 122284,
+  "decoded_bytes_processed": 3155093248,
+  "validation": {
+    "loss_per_token": 0.9081993525226911,
+    "bpb": 1.310254702023054,
+    "tokens": 786432,
+    "decoded_bytes": 786432,
+    "seconds": 4.579317547031678,
+    "tokens_per_second": 171735.63351372446,
+    "decoded_bytes_per_second": 171735.63351372446
+  },
+  "binary_bytes": 7052160,
+  "dense_mode": "qkv_tickets_prepacked_output16",
+  "readout_factor_output": "fp16",
+  "native_operations": {
+    "embedding": [
+      "packed address",
+      "EOR",
+      "SCVTF",
+      "FMUL"
+    ],
+    "dense_attention": [
+      "FMAX",
+      "FCVTNS",
+      "SQXTN",
+      "SDOT",
+      "SCVTF",
+      "FMUL"
+    ],
+    "attention_output": [
+      "included in dense_attention"
+    ],
+    "boolean_boundary": [
+      "FCVTN",
+      "FCVTL",
+      "FCMGE"
+    ],
+    "boolean_program": [
+      "EXT",
+      "BSL",
+      "EOR"
+    ],
+    "boolean_decode": [
+      "CNT",
+      "SDOT",
+      "FMLA"
+    ],
+    "readout": [
+      "EOR",
+      "CNT",
+      "SDOT",
+      "FCVTN",
+      "FMLAL",
+      "FMLAL2",
+      "FADD"
+    ],
+    "kv_cache": [
+      "FCVTNS/SQXTN fixed-scale INT8 key store",
+      "SDOT query-key score",
+      "FCVTNS/SQXTN fixed weight-RMS INT8 value store",
+      "FMLA/FMAX/FCVTNS/SQXTN clipped-weight quantization",
+      "time-blocked SDOT weighted-value reduction",
+      "ring-buffer integer addressing"
+    ],
+    "attention_skip": [
+      "none"
+    ],
+    "attention_shared_input": [
+      "none"
+    ],
+    "attention_shared_qk": [
+      "none"
+    ]
+  },
+  "config": {
+    "corpus_dir": "data/enwik9_bytes",
+    "output_dir": "runs/lossless_enwik_c1536_jolt_r1/c1536",
+    "context_tokens": 1536,
+    "stride_tokens": 1536,
+    "validation_stride_tokens": 1536,
+    "batch_size": 16,
+    "gradient_accumulation_steps": 1,
+    "maximum_updates": 125410,
+    "target_decoded_bytes": 150000000,
+    "report_every_decoded_bytes": 25000000,
+    "validation_batches": 32,
+    "validation_sampling": "shared_regions",
+    "validation_region_tokens": 3072,
+    "validation_regions": 256,
+    "training_sampling": "blocks",
+    "seed": 20260917,
+    "device": "cuda",
+    "threads": 4,
+    "learning_rate": 1e-05,
+    "embedding_learning_rate": 1e-05,
+    "lr_decay_bytes": 150000000,
+    "lr_decay_final_fraction": 0.1,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "dimension": 256,
+    "layers": 4,
+    "heads": 8,
+    "kv_heads": 1,
+    "ff_dimension": 82,
+    "ff_extra_dimension": 0,
+    "ff_extra_dimension_layers": 0,
+    "feedforward_activation": "boolean_lut3",
+    "boolean_width": 2048,
+    "boolean_rounds": 3,
+    "boolean_ffn_correction_features": 192,
+    "boolean_ffn_correction_rank": 0,
+    "boolean_ffn_correction_mode": "dense",
+    "boolean_ffn_correction_block_active_fraction": 1.0,
+    "boolean_ffn_correction_taps": "equal_trajectory",
+    "boolean_ffn_pool_schedule": "state_rotated",
+    "boolean_ffn_routes": "register_mix",
+    "boolean_ffn_thresholds": "linear",
+    "boolean_ffn_input_rounding": "fp16",
+    "boolean_backward": "hybrid",
+    "boolean_temperature": 1.0,
+    "boolean_gradient_leak": 0.05,
+    "boolean_program_init_margin": 0.02,
+    "boolean_register_bits": 128,
+    "boolean_balance_weight": 0.001,
+    "boolean_gate_weight": 0.0001,
+    "boolean_residual_state": "numerical",
+    "residual_boundary": "none",
+    "residual_normalizer": "rms",
+    "token_feature": "plain",
+    "token_smear": "none",
+    "value_embedding_layers": [
+      1,
+      2,
+      7,
+      8,
+      9
+    ],
+    "bigram_hash_size": 16384,
+    "bigram_dimension": 56,
+    "bigram_sign_mode": "none",
+    "bigram_learned_scale": true,
+    "ngram_orders": [
+      3,
+      4,
+      6
+    ],
+    "ngram_heads": 2,
+    "ngram_table_rows": 16384,
+    "ngram_dimension": 64,
+    "rope_base": 10000.0,
+    "rope_fraction": 0.5,
+    "partial_key_offset": "none",
+    "qk_norm": true,
+    "qk_cache_precision": "int8_fixed4",
+    "value_cache_precision": "int8_weight_rms_scalar",
+    "qk_head_dimension": 16,
+    "local_qk_head_dimension": 0,
+    "kv_head_routing": "repeat",
+    "kv_head_sharing": "value",
+    "attention_qkv_projection_mode": "block_sparse_16x16",
+    "qkv_squeeze_bitplanes": 8,
+    "qkv_squeeze_polarities": 2,
+    "qkv_squeeze_group_bits": 32,
+    "qkv_squeeze_bypass": 32,
+    "qkv_squeeze_input_rounding": "fp16",
+    "qkv_low_rank": 64,
+    "qkv_shared_bases": 1,
+    "qkv_local_width": 64,
+    "qkv_global_rank": 16,
+    "qkv_route_count": 16,
+    "qkv_bitmix_rounds": 2,
+    "qkv_bitmix_correction_features": 48,
+    "qkv_bitmix_cell": "eor3",
+    "qkv_block_allocation": "uniform",
+    "qkv_block_rows": 8,
+    "qkv_ticket_selection": "magnitude",
+    "qkv_ticket_temperature": 0.25,
+    "qkv_head_input_groups": 0,
+    "attention_qk_mode": "numerical",
+    "boolean_qk_width": 640,
+    "boolean_qk_rounds": 5,
+    "boolean_qk_bits_per_head": 64,
+    "boolean_qk_correction_features": 0,
+    "boolean_qk_correction_taps": "final",
+    "attention_value_mode": "numerical",
+    "attention_value_block_active_fraction": 1.0,
+    "boolean_value_width": 640,
+    "boolean_value_rounds": 5,
+    "boolean_value_bits": 0,
+    "boolean_value_correction_features": 0,
+    "attention_output_mode": "block_sparse_16x16",
+    "boolean_output_width": 640,
+    "boolean_output_rounds": 5,
+    "boolean_output_correction_features": 0,
+    "boolean_output_correction_taps": "final",
+    "boolean_output_routes": "byte_lane",
+    "boolean_output_cell": "lut3",
+    "attention_output_block_active_fraction": 0.5,
+    "attention_output_codewords": 32,
+    "attention_output_codebook_temperature": 0.25,
+    "attention_output_codebook_response_shift": 10,
+    "attention_output_head_local_rank": 0,
+    "attention_output_squeeze_bitplanes": 8,
+    "attention_output_squeeze_polarities": 2,
+    "attention_output_squeeze_group_bits": 32,
+    "attention_output_squeeze_bypass": 32,
+    "attention_output_input_rounding": "fp16",
+    "attention_normalizer": "clipped_linear",
+    "clipped_linear_initial_slope": 0.5,
+    "attention_window_policy": "head_local",
+    "local_attention_window": 32,
+    "local_attention_heads": 7,
+    "local_attention_layers": [
+      0,
+      2,
+      4,
+      6,
+      8
+    ],
+    "attention_skip_layers": [],
+    "attention_shared_input_layers": [],
+    "attention_shared_qk_layers": [],
+    "attention_shared_qk_mode": "none",
+    "zero_init_residual": true,
+    "tie_embeddings": true,
+    "vocabulary_path": "boolean_hybrid",
+    "boolean_vocab_code_width": 64,
+    "boolean_vocab_pool_bits": 16,
+    "boolean_vocab_pool_schedule": "uniform",
+    "boolean_vocab_correction_rank": 64,
+    "boolean_vocab_factor_output": "fp16",
+    "vocabulary_hierarchy": "flat",
+    "boolean_token_expansion": "repeat",
+    "residual_scalars": true,
+    "residual_routing": "ordinary",
+    "u_skip_pairs": [
+      [
+        1,
+        8
+      ],
+      [
+        3,
+        6
+      ]
+    ],
+    "dynamic_route_layers": [
+      4,
+      7,
+      9
+    ],
+    "dynamic_route_dimension": 16,
+    "dropout": 0.0,
+    "vocabulary_padding_multiple": 128,
+    "sample_every_report": false,
+    "sample_prompt": "'''Albert Einstein''' was a",
+    "sample_decoded_bytes": 256,
+    "sample_temperature": 0.7,
+    "sample_top_k": 40,
+    "sample_seed": 20260825,
+    "save_every_reports": 1,
+    "resume": "runs/lossless_enwik_c1536_plateau_r1/c1536/best.pt",
+    "initialize_from": null,
+    "projection_distill_updates": 0
+  },
+  "tensors": {
+    "tokenizer.byte_token_ids": {
+      "offset": 0,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "uint16",
+      "layout": "tokenizer-table"
+    },
+    "tokenizer.token_offsets": {
+      "offset": 512,
+      "bytes": 1028,
+      "shape": [
+        257
+      ],
+      "dtype": "uint32",
+      "layout": "tokenizer-table"
+    },
+    "tokenizer.token_bytes": {
+      "offset": 1600,
+      "bytes": 256,
+      "shape": [
+        256
+      ],
+      "dtype": "uint8",
+      "layout": "tokenizer-table"
+    },
+    "tokenizer.merge_triples": {
+      "offset": 1856,
+      "bytes": 0,
+      "shape": [
+        0,
+        3
+      ],
+      "dtype": "uint16",
+      "layout": "tokenizer-table"
+    },
+    "boolean_token_codes": {
+      "offset": 1856,
+      "bytes": 2048,
+      "shape": [
+        256,
+        8
+      ],
+      "dtype": "uint8",
+      "layout": "256x64-packed"
+    },
+    "ngram_table.int8": {
+      "offset": 3904,
+      "bytes": 6291456,
+      "shape": [
+        6,
+        16384,
+        64
+      ],
+      "dtype": "int8",
+      "layout": "region-major, 64-byte cache-line rows"
+    },
+    "ngram_table.scales": {
+      "offset": 6295360,
+      "bytes": 24,
+      "shape": [
+        6
+      ],
+      "dtype": "float32",
+      "layout": "one scale per order/head region"
+    },
+    "readout.hierarchy_leaf_codes": {
+      "offset": 6295424,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint8",
+      "layout": "unused-token-codes-addressed-through-hierarchy-token-ids"
+    },
+    "readout.hierarchy_cluster_codes": {
+      "offset": 6295424,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint8",
+      "layout": "32x64-packed"
+    },
+    "readout.hierarchy_cluster_output_f16": {
+      "offset": 6295424,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float16",
+      "layout": "32xrank-row-major-fp16"
+    },
+    "readout.hierarchy_cluster_bias": {
+      "offset": 6295424,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float32",
+      "layout": "32xf32"
+    },
+    "readout.hierarchy_token_ids": {
+      "offset": 6295424,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint16",
+      "layout": "cluster-major-32x64-u16-token-ids"
+    },
+    "readout.hierarchy_token_index": {
+      "offset": 6295424,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint16",
+      "layout": "256xu16-token-to-cluster-major-index"
+    },
+    "input_norm.weight": {
+      "offset": 6295424,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "float16",
+      "layout": "row-major"
+    },
+    "final_norm.weight": {
+      "offset": 6295936,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "float16",
+      "layout": "row-major"
+    },
+    "layers.0.residual_scales": {
+      "offset": 6296448,
+      "bytes": 16,
+      "shape": [
+        4
+      ],
+      "dtype": "float32",
+      "layout": "scalar"
+    },
+    "layers.0.attention_norm.weight": {
+      "offset": 6296512,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "float16",
+      "layout": "row-major"
+    },
+    "layers.0.attention.clipped_linear_slope": {
+      "offset": 6297024,
+      "bytes": 32,
+      "shape": [
+        1,
+        8,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "layout": "per-head"
+    },
+    "layers.0.attention.value_cache_scale": {
+      "offset": 6297088,
+      "bytes": 4,
+      "shape": [
+        1
+      ],
+      "dtype": "float32",
+      "layout": "one-fixed-weight-rms-scale-per-layer"
+    },
+    "layers.0.feedforward_norm.weight": {
+      "offset": 6297152,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "float16",
+      "layout": "row-major"
+    },
+    "layers.0.attention.output_int8": {
+      "offset": 6297664,
+      "bytes": 32768,
+      "shape": [
+        128,
+        16,
+        16
+      ],
+      "dtype": "int8",
+      "layout": "prepacked-16x16-ticket-weights"
+    },
+    "layers.0.attention.output_scales": {
+      "offset": 6330432,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.0.attention.output_ticket_offsets": {
+      "offset": 6331456,
+      "bytes": 34,
+      "shape": [
+        17
+      ],
+      "dtype": "uint16",
+      "layout": "17xu16-ticket-offsets"
+    },
+    "layers.0.attention.output_ticket_columns": {
+      "offset": 6331520,
+      "bytes": 128,
+      "shape": [
+        128
+      ],
+      "dtype": "uint8",
+      "layout": "128xu8-column-tickets"
+    },
+    "layers.0.attention.qkv_int8": {
+      "offset": 6331648,
+      "bytes": 73728,
+      "shape": [
+        576,
+        8,
+        16
+      ],
+      "dtype": "int8",
+      "layout": "prepacked-8x16-ticket-weights"
+    },
+    "layers.0.attention.qkv_scales": {
+      "offset": 6405376,
+      "bytes": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.0.attention.qkv_ticket_offsets": {
+      "offset": 6406528,
+      "bytes": 74,
+      "shape": [
+        37
+      ],
+      "dtype": "uint16",
+      "layout": "37xu16-ticket-offsets"
+    },
+    "layers.0.attention.qkv_ticket_columns": {
+      "offset": 6406656,
+      "bytes": 576,
+      "shape": [
+        576
+      ],
+      "dtype": "uint8",
+      "layout": "576xu8-column-tickets"
+    },
+    "layers.0.boolean_ffn.encoder_offsets": {
+      "offset": 6407232,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.0.boolean_ffn.program": {
+      "offset": 6408256,
+      "bytes": 6144,
+      "shape": [
+        3,
+        8,
+        256
+      ],
+      "dtype": "uint8",
+      "layout": "round-plane-packed"
+    },
+    "layers.0.boolean_ffn.decoder_weight": {
+      "offset": 6414400,
+      "bytes": 8192,
+      "shape": [
+        256,
+        8
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.0.boolean_ffn.decoder_int8": {
+      "offset": 6422592,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "int8",
+      "layout": "unused"
+    },
+    "layers.0.boolean_ffn.decoder_scales": {
+      "offset": 6422592,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.0.boolean_ffn.decoder_bias": {
+      "offset": 6422592,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.0.boolean_ffn.correction_int8": {
+      "offset": 6423616,
+      "bytes": 49152,
+      "shape": [
+        256,
+        192
+      ],
+      "dtype": "int8",
+      "layout": "row-major-int8"
+    },
+    "layers.0.boolean_ffn.correction_scales": {
+      "offset": 6472768,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.0.boolean_ffn.correction_ticket_offsets": {
+      "offset": 6473792,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint16",
+      "layout": "0xu16-ticket-offsets"
+    },
+    "layers.0.boolean_ffn.correction_ticket_columns": {
+      "offset": 6473792,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint8",
+      "layout": "0xu8-column-tickets"
+    },
+    "layers.0.boolean_ffn.correction_output_f16": {
+      "offset": 6473792,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float16",
+      "layout": "row-major-fp16-factor-output"
+    },
+    "layers.1.residual_scales": {
+      "offset": 6473792,
+      "bytes": 16,
+      "shape": [
+        4
+      ],
+      "dtype": "float32",
+      "layout": "scalar"
+    },
+    "layers.1.attention_norm.weight": {
+      "offset": 6473856,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "float16",
+      "layout": "row-major"
+    },
+    "layers.1.attention.clipped_linear_slope": {
+      "offset": 6474368,
+      "bytes": 32,
+      "shape": [
+        1,
+        8,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "layout": "per-head"
+    },
+    "layers.1.attention.value_cache_scale": {
+      "offset": 6474432,
+      "bytes": 4,
+      "shape": [
+        1
+      ],
+      "dtype": "float32",
+      "layout": "one-fixed-weight-rms-scale-per-layer"
+    },
+    "layers.1.feedforward_norm.weight": {
+      "offset": 6474496,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "float16",
+      "layout": "row-major"
+    },
+    "layers.1.attention.output_int8": {
+      "offset": 6475008,
+      "bytes": 32768,
+      "shape": [
+        128,
+        16,
+        16
+      ],
+      "dtype": "int8",
+      "layout": "prepacked-16x16-ticket-weights"
+    },
+    "layers.1.attention.output_scales": {
+      "offset": 6507776,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.1.attention.output_ticket_offsets": {
+      "offset": 6508800,
+      "bytes": 34,
+      "shape": [
+        17
+      ],
+      "dtype": "uint16",
+      "layout": "17xu16-ticket-offsets"
+    },
+    "layers.1.attention.output_ticket_columns": {
+      "offset": 6508864,
+      "bytes": 128,
+      "shape": [
+        128
+      ],
+      "dtype": "uint8",
+      "layout": "128xu8-column-tickets"
+    },
+    "layers.1.attention.qkv_int8": {
+      "offset": 6508992,
+      "bytes": 73728,
+      "shape": [
+        576,
+        8,
+        16
+      ],
+      "dtype": "int8",
+      "layout": "prepacked-8x16-ticket-weights"
+    },
+    "layers.1.attention.qkv_scales": {
+      "offset": 6582720,
+      "bytes": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.1.attention.qkv_ticket_offsets": {
+      "offset": 6583872,
+      "bytes": 74,
+      "shape": [
+        37
+      ],
+      "dtype": "uint16",
+      "layout": "37xu16-ticket-offsets"
+    },
+    "layers.1.attention.qkv_ticket_columns": {
+      "offset": 6584000,
+      "bytes": 576,
+      "shape": [
+        576
+      ],
+      "dtype": "uint8",
+      "layout": "576xu8-column-tickets"
+    },
+    "layers.1.boolean_ffn.encoder_offsets": {
+      "offset": 6584576,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.1.boolean_ffn.program": {
+      "offset": 6585600,
+      "bytes": 6144,
+      "shape": [
+        3,
+        8,
+        256
+      ],
+      "dtype": "uint8",
+      "layout": "round-plane-packed"
+    },
+    "layers.1.boolean_ffn.decoder_weight": {
+      "offset": 6591744,
+      "bytes": 8192,
+      "shape": [
+        256,
+        8
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.1.boolean_ffn.decoder_int8": {
+      "offset": 6599936,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "int8",
+      "layout": "unused"
+    },
+    "layers.1.boolean_ffn.decoder_scales": {
+      "offset": 6599936,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.1.boolean_ffn.decoder_bias": {
+      "offset": 6599936,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.1.boolean_ffn.correction_int8": {
+      "offset": 6600960,
+      "bytes": 49152,
+      "shape": [
+        256,
+        192
+      ],
+      "dtype": "int8",
+      "layout": "row-major-int8"
+    },
+    "layers.1.boolean_ffn.correction_scales": {
+      "offset": 6650112,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.1.boolean_ffn.correction_ticket_offsets": {
+      "offset": 6651136,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint16",
+      "layout": "0xu16-ticket-offsets"
+    },
+    "layers.1.boolean_ffn.correction_ticket_columns": {
+      "offset": 6651136,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint8",
+      "layout": "0xu8-column-tickets"
+    },
+    "layers.1.boolean_ffn.correction_output_f16": {
+      "offset": 6651136,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float16",
+      "layout": "row-major-fp16-factor-output"
+    },
+    "layers.2.residual_scales": {
+      "offset": 6651136,
+      "bytes": 16,
+      "shape": [
+        4
+      ],
+      "dtype": "float32",
+      "layout": "scalar"
+    },
+    "layers.2.attention_norm.weight": {
+      "offset": 6651200,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "float16",
+      "layout": "row-major"
+    },
+    "layers.2.attention.clipped_linear_slope": {
+      "offset": 6651712,
+      "bytes": 32,
+      "shape": [
+        1,
+        8,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "layout": "per-head"
+    },
+    "layers.2.attention.value_cache_scale": {
+      "offset": 6651776,
+      "bytes": 4,
+      "shape": [
+        1
+      ],
+      "dtype": "float32",
+      "layout": "one-fixed-weight-rms-scale-per-layer"
+    },
+    "layers.2.feedforward_norm.weight": {
+      "offset": 6651840,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "float16",
+      "layout": "row-major"
+    },
+    "layers.2.attention.output_int8": {
+      "offset": 6652352,
+      "bytes": 32768,
+      "shape": [
+        128,
+        16,
+        16
+      ],
+      "dtype": "int8",
+      "layout": "prepacked-16x16-ticket-weights"
+    },
+    "layers.2.attention.output_scales": {
+      "offset": 6685120,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.2.attention.output_ticket_offsets": {
+      "offset": 6686144,
+      "bytes": 34,
+      "shape": [
+        17
+      ],
+      "dtype": "uint16",
+      "layout": "17xu16-ticket-offsets"
+    },
+    "layers.2.attention.output_ticket_columns": {
+      "offset": 6686208,
+      "bytes": 128,
+      "shape": [
+        128
+      ],
+      "dtype": "uint8",
+      "layout": "128xu8-column-tickets"
+    },
+    "layers.2.attention.qkv_int8": {
+      "offset": 6686336,
+      "bytes": 73728,
+      "shape": [
+        576,
+        8,
+        16
+      ],
+      "dtype": "int8",
+      "layout": "prepacked-8x16-ticket-weights"
+    },
+    "layers.2.attention.qkv_scales": {
+      "offset": 6760064,
+      "bytes": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.2.attention.qkv_ticket_offsets": {
+      "offset": 6761216,
+      "bytes": 74,
+      "shape": [
+        37
+      ],
+      "dtype": "uint16",
+      "layout": "37xu16-ticket-offsets"
+    },
+    "layers.2.attention.qkv_ticket_columns": {
+      "offset": 6761344,
+      "bytes": 576,
+      "shape": [
+        576
+      ],
+      "dtype": "uint8",
+      "layout": "576xu8-column-tickets"
+    },
+    "layers.2.boolean_ffn.encoder_offsets": {
+      "offset": 6761920,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.2.boolean_ffn.program": {
+      "offset": 6762944,
+      "bytes": 6144,
+      "shape": [
+        3,
+        8,
+        256
+      ],
+      "dtype": "uint8",
+      "layout": "round-plane-packed"
+    },
+    "layers.2.boolean_ffn.decoder_weight": {
+      "offset": 6769088,
+      "bytes": 8192,
+      "shape": [
+        256,
+        8
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.2.boolean_ffn.decoder_int8": {
+      "offset": 6777280,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "int8",
+      "layout": "unused"
+    },
+    "layers.2.boolean_ffn.decoder_scales": {
+      "offset": 6777280,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.2.boolean_ffn.decoder_bias": {
+      "offset": 6777280,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.2.boolean_ffn.correction_int8": {
+      "offset": 6778304,
+      "bytes": 49152,
+      "shape": [
+        256,
+        192
+      ],
+      "dtype": "int8",
+      "layout": "row-major-int8"
+    },
+    "layers.2.boolean_ffn.correction_scales": {
+      "offset": 6827456,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.2.boolean_ffn.correction_ticket_offsets": {
+      "offset": 6828480,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint16",
+      "layout": "0xu16-ticket-offsets"
+    },
+    "layers.2.boolean_ffn.correction_ticket_columns": {
+      "offset": 6828480,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint8",
+      "layout": "0xu8-column-tickets"
+    },
+    "layers.2.boolean_ffn.correction_output_f16": {
+      "offset": 6828480,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float16",
+      "layout": "row-major-fp16-factor-output"
+    },
+    "layers.3.residual_scales": {
+      "offset": 6828480,
+      "bytes": 16,
+      "shape": [
+        4
+      ],
+      "dtype": "float32",
+      "layout": "scalar"
+    },
+    "layers.3.attention_norm.weight": {
+      "offset": 6828544,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "float16",
+      "layout": "row-major"
+    },
+    "layers.3.attention.clipped_linear_slope": {
+      "offset": 6829056,
+      "bytes": 32,
+      "shape": [
+        1,
+        8,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "layout": "per-head"
+    },
+    "layers.3.attention.value_cache_scale": {
+      "offset": 6829120,
+      "bytes": 4,
+      "shape": [
+        1
+      ],
+      "dtype": "float32",
+      "layout": "one-fixed-weight-rms-scale-per-layer"
+    },
+    "layers.3.feedforward_norm.weight": {
+      "offset": 6829184,
+      "bytes": 512,
+      "shape": [
+        256
+      ],
+      "dtype": "float16",
+      "layout": "row-major"
+    },
+    "layers.3.attention.output_int8": {
+      "offset": 6829696,
+      "bytes": 32768,
+      "shape": [
+        128,
+        16,
+        16
+      ],
+      "dtype": "int8",
+      "layout": "prepacked-16x16-ticket-weights"
+    },
+    "layers.3.attention.output_scales": {
+      "offset": 6862464,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.3.attention.output_ticket_offsets": {
+      "offset": 6863488,
+      "bytes": 34,
+      "shape": [
+        17
+      ],
+      "dtype": "uint16",
+      "layout": "17xu16-ticket-offsets"
+    },
+    "layers.3.attention.output_ticket_columns": {
+      "offset": 6863552,
+      "bytes": 128,
+      "shape": [
+        128
+      ],
+      "dtype": "uint8",
+      "layout": "128xu8-column-tickets"
+    },
+    "layers.3.attention.qkv_int8": {
+      "offset": 6863680,
+      "bytes": 73728,
+      "shape": [
+        576,
+        8,
+        16
+      ],
+      "dtype": "int8",
+      "layout": "prepacked-8x16-ticket-weights"
+    },
+    "layers.3.attention.qkv_scales": {
+      "offset": 6937408,
+      "bytes": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.3.attention.qkv_ticket_offsets": {
+      "offset": 6938560,
+      "bytes": 74,
+      "shape": [
+        37
+      ],
+      "dtype": "uint16",
+      "layout": "37xu16-ticket-offsets"
+    },
+    "layers.3.attention.qkv_ticket_columns": {
+      "offset": 6938688,
+      "bytes": 576,
+      "shape": [
+        576
+      ],
+      "dtype": "uint8",
+      "layout": "576xu8-column-tickets"
+    },
+    "layers.3.boolean_ffn.encoder_offsets": {
+      "offset": 6939264,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.3.boolean_ffn.program": {
+      "offset": 6940288,
+      "bytes": 6144,
+      "shape": [
+        3,
+        8,
+        256
+      ],
+      "dtype": "uint8",
+      "layout": "round-plane-packed"
+    },
+    "layers.3.boolean_ffn.decoder_weight": {
+      "offset": 6946432,
+      "bytes": 8192,
+      "shape": [
+        256,
+        8
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.3.boolean_ffn.decoder_int8": {
+      "offset": 6954624,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "int8",
+      "layout": "unused"
+    },
+    "layers.3.boolean_ffn.decoder_scales": {
+      "offset": 6954624,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.3.boolean_ffn.decoder_bias": {
+      "offset": 6954624,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    },
+    "layers.3.boolean_ffn.correction_int8": {
+      "offset": 6955648,
+      "bytes": 49152,
+      "shape": [
+        256,
+        192
+      ],
+      "dtype": "int8",
+      "layout": "row-major-int8"
+    },
+    "layers.3.boolean_ffn.correction_scales": {
+      "offset": 7004800,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "per-row"
+    },
+    "layers.3.boolean_ffn.correction_ticket_offsets": {
+      "offset": 7005824,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint16",
+      "layout": "0xu16-ticket-offsets"
+    },
+    "layers.3.boolean_ffn.correction_ticket_columns": {
+      "offset": 7005824,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "uint8",
+      "layout": "0xu8-column-tickets"
+    },
+    "layers.3.boolean_ffn.correction_output_f16": {
+      "offset": 7005824,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float16",
+      "layout": "row-major-fp16-factor-output"
+    },
+    "readout.correction_int8": {
+      "offset": 7005824,
+      "bytes": 12288,
+      "shape": [
+        64,
+        192
+      ],
+      "dtype": "int8",
+      "layout": "row-major-int8-factor-input-padded192"
+    },
+    "readout.correction_scales": {
+      "offset": 7018112,
+      "bytes": 256,
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "layout": "per-factor-row-includes-signed-count-normalization"
+    },
+    "readout.correction_output_f16": {
+      "offset": 7018368,
+      "bytes": 32768,
+      "shape": [
+        256,
+        64
+      ],
+      "dtype": "float16",
+      "layout": "row-major-fp16-factor-output"
+    },
+    "readout.correction_output_int8": {
+      "offset": 7051136,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "int8",
+      "layout": "row-major-int8-factor-output-fp16"
+    },
+    "readout.correction_output_scales": {
+      "offset": 7051136,
+      "bytes": 0,
+      "shape": [
+        0
+      ],
+      "dtype": "float32",
+      "layout": "factor-output-scales-fp16"
+    },
+    "readout.bias": {
+      "offset": 7051136,
+      "bytes": 1024,
+      "shape": [
+        256
+      ],
+      "dtype": "float32",
+      "layout": "row-major"
+    }
+  }
+}
